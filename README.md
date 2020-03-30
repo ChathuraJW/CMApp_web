@@ -1,1 +1,1 @@
-SMApp_web
+CMApp_web
