@@ -20,7 +20,7 @@
             $sqlGetCount="SELECT COUNT(stuID) FROM student;";
             $resultSetGetCount=mysqli_query($conn,$sqlGetCount);
             $count=mysqli_fetch_assoc($resultSetGetCount)['COUNT(stuID)']+1;
-            $stuID="STU".strval(str_pad($count, 3, '0', STR_PAD_LEFT));
+            $stuID="STU".strval(str_pad($count, 4, '0', STR_PAD_LEFT));
             $sqlStuReg="INSERT INTO student(stuID, name, NIC, gender, DOB, address, telNo, guardian) VALUES ('$stuID','$name','$nic','$gender','$dob','$address','$contact','$guardian')";
             // echo($sql);
             $resultSetStuReg=mysqli_query($conn,$sqlStuReg);
@@ -67,44 +67,49 @@
                                 ");
                             }
                             if($queryStateInit){
-                                $queryStateInit=FALSE;
-                                $queryStateAfter=FALSE;
                                 echo("
                                 <h2 style='color:green;' align='center'><b>Registration Sucessful.<br/>Thank you for register with our system.<br/>😃</b></h2>
-                                <h5 style='color:blue;'>Name: $name</h5>
-                                <h5 style='color:blue;'>Registration Number: $stuID</h5><br/>
-                                <center><a href='#' class='btn btn-primary'>For a New Registration</a></center>
+                                <h5 style='color:blue;'>Name: <b>$name</b></h5>
+                                <h5 style='color:blue;'>Registration Number: <b>$stuID</b></h5><br/>
+                                <form action='#' method='post'>
+                                <center><button name='newReg' class='btn btn-primary'>For a New Registration</button></center>
+                                </form>
                                 ");
+                                if(isset($_POST['newReg'])){
+                                    $queryStateInit=FALSE;
+                                    $queryStateAfter=FALSE;
+                                    header("Refresh:0");
+                                }
                             }else{
                                 echo("
                                     <form action='#' method='post' class='form-horizontal'>
                                         <div class='form-group'>
                                             <label>Full Name:</label>
-                                            <input type='text' name='name' class='form-control'>
+                                            <input type='text' name='name' class='form-control' required>
                                         </div>
                                         <div class='form-group'>
                                             <label>NIC Number:</label>
-                                            <input type='text' name='nic' class='form-control'>
+                                            <input type='text' name='nic' class='form-control' required>
                                         </div>
                                         <div class='form-group'>
                                             <label>Gender:</label>
                                             <br/>
                                             <div class='radio-inline'>
-                                                <input type='radio' name='gender' id='' value='M' class=''>&nbsp;&nbsp;&nbsp;Male:
-                                                <input type='radio' name='gender' id='' value='F' class=''>&nbsp;&nbsp;&nbsp;Female:
+                                                <input type='radio' name='gender' id='' value='M' class='' required>&nbsp;&nbsp;&nbsp;Male:
+                                                <input type='radio' name='gender' id='' value='F' class='' required>&nbsp;&nbsp;&nbsp;Female:
                                             </div>
                                         </div>
                                         <div class='form-group'>
                                             <label>Date of Birth:</label>
-                                            <input type='date' name='dob' id='' class='form-control'>
+                                            <input type='date' name='dob' id='' class='form-control' required>
                                         </div>
                                         <div class='form-group'>
                                             <label>Address:</label>
-                                            <textarea name='address' id='address' cols='30' rows='3' class='form-control'></textarea>
+                                            <textarea name='address' id='address' cols='30' rows='3' class='form-control' required></textarea>
                                         </div>
                                         <div class='form-group'>
                                             <label>Contact Number:</label>
-                                            <input type='text' name='tpNo' id='' class='form-control'>
+                                            <input type='text' name='tpNo' id='' class='form-control' required>
                                         </div>
                                         <div class='form-group'>
                                             <label>guardian's Name:</label>
