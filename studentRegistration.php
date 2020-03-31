@@ -39,6 +39,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Student Registration</title>
         <link rel="stylesheet" href="assert/bootstrap.min.css">
+        <link rel="icon" href="assert/webpageIcon.png">
     </head>
 
     <body>
@@ -57,7 +58,7 @@
                 <div class="col-lg-4" style=""></div>
                 <div class="col-lg-4">
                     <h1 style="color:blue;">Student Registration</h1>
-                    <img src="stuRegistration.png" alt="" width="100%">
+                    <img src="assert/stuRegistration.png" alt="" width="100%">
                     <div class="content">
                     <br/>
                         <?php
