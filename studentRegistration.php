@@ -19,8 +19,12 @@
             $resultSetGetCount=mysqli_query($conn,$sqlGetCount);
             $count=mysqli_fetch_assoc($resultSetGetCount)['COUNT(stuID)']+1;
             $stuID="STU".strval(str_pad($count, 3, '0', STR_PAD_LEFT));
-            $sql="INSERT INTO student(stuID, name, NIC, gender, DOB, address, telNo, guardian) VALUES ('$stuID','$name','$nic','$gender','$dob','$address','$contact','$guardian')";
+            $sqlStuReg="INSERT INTO student(stuID, name, NIC, gender, DOB, address, telNo, guardian) VALUES ('$stuID','$name','$nic','$gender','$dob','$address','$contact','$guardian')";
             // echo($sql);
+            $resultSetStuReg=mysqli_query($conn,$sqlStuReg);
+            if($resultSetStuReg){
+
+            }
         }
     }
 ?>
@@ -50,45 +54,47 @@
                 <div class="col-lg-4">
                     <h1 style="color:blue;">Student Registration</h1>
                     <img src="stuRegistration.png" alt="" width="100%">
-                    <form action="#" method="post" class="form-horizontal">
-                        <div class="form-group">
-                            <label>Full Name:</label>
-                            <input type="text" name="name" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>NIC Number:</label>
-                            <input type="text" name="nic" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Gender:</label>
-                            <br/>
-                            <div class="radio-inline">
-                                <input type="radio" name="gender" id="" value="M" class="">&nbsp;&nbsp;&nbsp;Male:
-                                <input type="radio" name="gender" id="" value="F" class="">&nbsp;&nbsp;&nbsp;Female:
+                    <div class="content">
+                        <form action="#" method="post" class="form-horizontal">
+                            <div class="form-group">
+                                <label>Full Name:</label>
+                                <input type="text" name="name" class="form-control">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Date of Birth:</label>
-                            <input type="date" name="dob" id="" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Address:</label>
-                            <textarea name="address" id="address" cols="30" rows="3" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Contact Number:</label>
-                            <input type="text" name="tpNo" id="" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>guardian's Name:</label>
-                            <input type="text" name="guardian" id="" class="form-control">
-                        </div>
-                        <br/>
-                        <div align="center">
-                            <input type="submit" name="submit" value="Submit" class="btn btn-success">
-                            <input type="reset" name="cancel" value="Cancel" class="btn btn-danger">
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label>NIC Number:</label>
+                                <input type="text" name="nic" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender:</label>
+                                <br/>
+                                <div class="radio-inline">
+                                    <input type="radio" name="gender" id="" value="M" class="">&nbsp;&nbsp;&nbsp;Male:
+                                    <input type="radio" name="gender" id="" value="F" class="">&nbsp;&nbsp;&nbsp;Female:
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth:</label>
+                                <input type="date" name="dob" id="" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Address:</label>
+                                <textarea name="address" id="address" cols="30" rows="3" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Number:</label>
+                                <input type="text" name="tpNo" id="" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>guardian's Name:</label>
+                                <input type="text" name="guardian" id="" class="form-control">
+                            </div>
+                            <br/>
+                            <div align="center">
+                                <input type="submit" name="submit" value="Submit" class="btn btn-success">
+                                <input type="reset" name="cancel" value="Cancel" class="btn btn-danger">
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="col-lg-4" style=""></div>
             </div>
