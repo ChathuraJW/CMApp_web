@@ -1,5 +1,7 @@
 <?php
     $connectionState;
+    $queryStateInit=FALSE;
+    $queryStateAfter=FALSE;
     ini_set('display_errors', '0');
     $conn=mysqli_connect("localhost","root","","systemdb");
     if(mysqli_connect_error($conn)){
@@ -23,7 +25,9 @@
             // echo($sql);
             $resultSetStuReg=mysqli_query($conn,$sqlStuReg);
             if($resultSetStuReg){
-
+                $queryStateInit=TRUE;
+            }else{
+                $queryStateAfter=TRUE;
             }
         }
     }
@@ -55,45 +59,67 @@
                     <h1 style="color:blue;">Student Registration</h1>
                     <img src="stuRegistration.png" alt="" width="100%">
                     <div class="content">
-                        <form action="#" method="post" class="form-horizontal">
-                            <div class="form-group">
-                                <label>Full Name:</label>
-                                <input type="text" name="name" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>NIC Number:</label>
-                                <input type="text" name="nic" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Gender:</label>
-                                <br/>
-                                <div class="radio-inline">
-                                    <input type="radio" name="gender" id="" value="M" class="">&nbsp;&nbsp;&nbsp;Male:
-                                    <input type="radio" name="gender" id="" value="F" class="">&nbsp;&nbsp;&nbsp;Female:
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Date of Birth:</label>
-                                <input type="date" name="dob" id="" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Address:</label>
-                                <textarea name="address" id="address" cols="30" rows="3" class="form-control"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Contact Number:</label>
-                                <input type="text" name="tpNo" id="" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>guardian's Name:</label>
-                                <input type="text" name="guardian" id="" class="form-control">
-                            </div>
-                            <br/>
-                            <div align="center">
-                                <input type="submit" name="submit" value="Submit" class="btn btn-success">
-                                <input type="reset" name="cancel" value="Cancel" class="btn btn-danger">
-                            </div>
-                        </form>
+                    <br/>
+                        <?php
+                            if($queryStateAfter){
+                                echo("
+                                    <h2 style='color:red;' align='center'><b>Registration faild.<br/>try again.<br/>😢</b></h2>
+                                ");
+                            }
+                            if($queryStateInit){
+                                $queryStateInit=FALSE;
+                                $queryStateAfter=FALSE;
+                                echo("
+                                <h2 style='color:green;' align='center'><b>Registration Sucessful.<br/>Thank you for register with our system.<br/>😃</b></h2>
+                                <h5 style='color:blue;'>Name: $name</h5>
+                                <h5 style='color:blue;'>Registration Number: $stuID</h5><br/>
+                                <center><a href='#' class='btn btn-primary'>For a New Registration</a></center>
+                                ");
+                            }else{
+                                echo("
+                                    <form action='#' method='post' class='form-horizontal'>
+                                        <div class='form-group'>
+                                            <label>Full Name:</label>
+                                            <input type='text' name='name' class='form-control'>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label>NIC Number:</label>
+                                            <input type='text' name='nic' class='form-control'>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label>Gender:</label>
+                                            <br/>
+                                            <div class='radio-inline'>
+                                                <input type='radio' name='gender' id='' value='M' class=''>&nbsp;&nbsp;&nbsp;Male:
+                                                <input type='radio' name='gender' id='' value='F' class=''>&nbsp;&nbsp;&nbsp;Female:
+                                            </div>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label>Date of Birth:</label>
+                                            <input type='date' name='dob' id='' class='form-control'>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label>Address:</label>
+                                            <textarea name='address' id='address' cols='30' rows='3' class='form-control'></textarea>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label>Contact Number:</label>
+                                            <input type='text' name='tpNo' id='' class='form-control'>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label>guardian's Name:</label>
+                                            <input type='text' name='guardian' id='' class='form-control'>
+                                        </div>
+                                        <br/>
+                                        <div align='center'>
+                                            <input type='submit' name='submit' value='Submit' class='btn btn-success'>
+                                            <input type='reset' name='cancel' value='Cancel' class='btn btn-danger'>
+                                        </div>
+                                    </form>
+                                ");
+                            }
+                        
+                        ?>
                     </div>
                 </div>
                 <div class="col-lg-4" style=""></div>
